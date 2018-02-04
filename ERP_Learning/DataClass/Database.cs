@@ -39,16 +39,16 @@ namespace ERP_Learning.DataClass
 
 
 
-        //public SqlConnection Conn
-        //{
-        //    get { return m_Conn; }
-        //}
+        public SqlConnection Conn
+        {
+            get { return m_Conn; }
+        }
 
 
-        //public SqlCommand Cmd
-        //{
-        //    get { return m_Cmd; }
-        //}
+        public SqlCommand Cmd
+        {
+            get { return m_Cmd; }
+        }
 
 
         public int ExecDataBySql(string strSql)
@@ -255,7 +255,35 @@ namespace ERP_Learning.DataClass
             return dt; 
         }
 
+        public DataTable ExecDataBySPWithValue(string strProcedureName, SqlParameter[] inputParameters)
+        {
+            DataTable dt = new DataTable();
+            SqlDataAdapter sda = null;
 
+            try
+            {
+                m_Cmd.CommandType = CommandType.StoredProcedure;
+                m_Cmd.CommandText = strProcedureName;
+                sda = new SqlDataAdapter(m_Cmd);
+                m_Cmd.Parameters.Clear();
+
+                foreach (SqlParameter param in inputParameters)
+                {
+                    param.Direction = ParameterDirection.Input;
+                    m_Cmd.Parameters.Add(param);
+                }
+
+                sda.Fill(dt);
+
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dt;
+        }
     }
 
 

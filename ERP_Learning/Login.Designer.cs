@@ -41,12 +41,14 @@
             // 
             // textUser
             // 
+            this.textUser.AcceptsTab = true;
             this.textUser.Location = new System.Drawing.Point(147, 148);
-            this.textUser.MaxLength = 10;
+            this.textUser.MaxLength = 40;
             this.textUser.Name = "textUser";
             this.textUser.Size = new System.Drawing.Size(155, 20);
-            this.textUser.TabIndex = 1;
+            this.textUser.TabIndex = 0;
             this.textUser.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textUser_KeyDown);
             // 
             // textPwd
             // 
@@ -54,7 +56,9 @@
             this.textPwd.Name = "textPwd";
             this.textPwd.PasswordChar = '*';
             this.textPwd.Size = new System.Drawing.Size(155, 20);
-            this.textPwd.TabIndex = 0;
+            this.textPwd.TabIndex = 1;
+            this.textPwd.TextChanged += new System.EventHandler(this.textPwd_TextChanged);
+            this.textPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textPwd_KeyDown);
             // 
             // 登录用户
             // 
@@ -90,7 +94,7 @@
             this.butReset.Location = new System.Drawing.Point(228, 277);
             this.butReset.Name = "butReset";
             this.butReset.Size = new System.Drawing.Size(75, 23);
-            this.butReset.TabIndex = 4;
+            this.butReset.TabIndex = 5;
             this.butReset.Text = "重置";
             this.butReset.UseVisualStyleBackColor = true;
             this.butReset.Click += new System.EventHandler(this.butReset_Click);
@@ -112,6 +116,7 @@
             this.Controls.Add(this.textUser);
             this.Name = "Login";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

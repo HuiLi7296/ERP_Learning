@@ -65,23 +65,28 @@
     <Compile Include="ComClass\OperatorFile.cs" />
     <Compile Include="ComClass\PropertyClass.cs" />
     <Compile Include="DataClass\Database.cs" />
+    <Compile Include="ERP_LearningDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_LearningDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="HR\Department.cs">
+    <Compile Include="HR\FormDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HR\Department.Designer.cs">
-      <DependentUpon>Department.cs</DependentUpon>
+    <Compile Include="HR\FormDepartment.Designer.cs">
+      <DependentUpon>FormDepartment.cs</DependentUpon>
     </Compile>
-    <Compile Include="HR\Employee.cs">
+    <Compile Include="HR\FormEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HR\Employee.Designer.cs">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <Compile Include="HR\FormEmployee.Designer.cs">
+      <DependentUpon>FormEmployee.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -91,11 +96,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PW\FormPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PW\FormPurchase.Designer.cs">
+      <DependentUpon>FormPurchase.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HR\Employee.resx">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <EmbeddedResource Include="HR\FormDepartment.resx">
+      <DependentUpon>FormDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\FormEmployee.resx">
+      <DependentUpon>FormEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -109,6 +123,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PW\FormPurchase.resx">
+      <DependentUpon>FormPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ERP_LearningDataSet.xsc">
+      <DependentUpon>ERP_LearningDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ERP_LearningDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ERP_LearningDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ERP_LearningDataSet.xss">
+      <DependentUpon>ERP_LearningDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\ERP_Learning.HR.FormEmployee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

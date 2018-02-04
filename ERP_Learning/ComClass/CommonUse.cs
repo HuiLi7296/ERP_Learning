@@ -33,7 +33,7 @@ namespace ERP_Learning.ComClass
             tv.Nodes.Clear();
             tv.ImageList = imgList;
             rootNode = new TreeNode();
-            rootNode.Tag = null;
+            rootNode.Tag = 0;
             rootNode.Text = rootName;
 
             rootNode.ImageIndex = 1;

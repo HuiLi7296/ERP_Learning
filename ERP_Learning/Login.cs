@@ -16,7 +16,7 @@ namespace ERP_Learning
     public partial class Login : Form
     {
         DataBase db = new DataBase();
-        SqlDataReader sdr = null; 
+        //SqlDataReader sdr = null; 
 
         public Login()
         {
@@ -72,31 +72,49 @@ namespace ERP_Learning
                 }
             }
 
-            string strSql = "SELECT * FROM dbo.[User] u JOIN dbo.Role r ON r.RoleID = u.RoleID";
-            strSql += " WHERE u.UserName ='" + textUser.Text.Trim();
-            strSql += "' AND u.UserPwd = '" + textPwd.Text.Trim() +"'";
+  
+
+            string SP = "checkLogin";
 
             try
             {
-                sdr =   db.GetDataReader(strSql);
-                sdr.Read();
+                //sdr =   db.GetDataReader(strSql);
+                SqlParameter param1 = new SqlParameter("@UserName", SqlDbType.VarChar);
+                param1.Value = textUser.Text.Trim();
 
-                if (sdr.HasRows)
-                {
-                    FormMain formMain = new FormMain();
-                    this.Hide();
-                    PropertyClass.UserID = sdr["UserID"].ToString();
-                    PropertyClass.UserName = sdr["UserName"].ToString();
-                    PropertyClass.UserPwd = sdr["UserPwd"].ToString();
-                    PropertyClass.Role = sdr["ShortName"].ToString();
+                SqlParameter param2 = new SqlParameter("@UserPwd", SqlDbType.VarChar);
+                param2.Value = textPwd.Text.Trim();
 
-                    formMain.Show();
-                }
 
-                else
-                {
-                    MessageBox.Show("用户名或者密码不正确！", "软件提示");
-                }
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(param1);
+                parameters.Add(param2);
+
+
+                SqlParameter[] inputParameters = parameters.ToArray();
+
+
+               DataTable sdr = db.ExecDataBySP(SP, inputParameters);
+
+                if (sdr.Rows.Count >0)
+ 
+                    {
+                        FormMain formMain = new FormMain();
+                        this.Hide();
+                        DataRow dr = sdr.Rows[0];
+                        PropertyClass.UserID = dr["UserID"].ToString();
+                        PropertyClass.UserName = dr["UserName"].ToString();
+                        PropertyClass.UserPwd = dr["UserPwd"].ToString();
+                        PropertyClass.Role = dr["ShortName"].ToString();
+
+                        formMain.Show();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("用户名或者密码不正确！", "软件提示");
+                    }
+                 
 
             }
             catch (Exception ex)
@@ -104,10 +122,7 @@ namespace ERP_Learning
                 MessageBox.Show(ex.Message, "软件提示");
 
             }
-            finally
-            {
-                sdr.Close();
-            }
+        
 
 
         }
@@ -133,12 +148,22 @@ namespace ERP_Learning
 
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
         //private void butLogin_Click_1(object sender, EventArgs e)
         //{
 
         //}
 
-        ////private void butReset_Click(object sender, EventArgs e)
+        private void textPwd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void butReset_Click(object sender, EventArgs e)
         //{
 
         //}
