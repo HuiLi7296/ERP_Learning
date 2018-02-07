@@ -102,6 +102,12 @@
     <Compile Include="PW\FormPurchase.Designer.cs">
       <DependentUpon>FormPurchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="PW\FormStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PW\FormStorage.Designer.cs">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="PW\FormPurchase.resx">
       <DependentUpon>FormPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PW\FormStorage.resx">
+      <DependentUpon>FormStorage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ERP_LearningDataSet.xsc">
       <DependentUpon>ERP_LearningDataSet.xsd</DependentUpon>

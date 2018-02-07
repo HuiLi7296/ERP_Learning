@@ -43,3 +43,18 @@ EXEC dbo.addEmployee @EmployeeName = N'22', -- nvarchar(40)
 UPDATE dbo.Employee SET Gender = 1
 
 DELETE dbo.Employee WHERE EmployeeID >15
+
+SELECT MaterialID ,
+       MaterialName FROM dbo.Material
+
+INSERT INTO dbo.Vendor
+        ( VendorID, VendorName )
+VALUES  ( 2, -- VendorID - int
+          N'Ó¢ÌØ¶û'  -- VendorName - nvarchar(50)
+          )
+
+		  INSERT INTO dbo.Material
+		          ( MaterialID, MaterialName )
+		  VALUES  ( 2, -- MaterialID - int
+		            N'CPU'  -- MaterialName - nvarchar(50)
+		            )

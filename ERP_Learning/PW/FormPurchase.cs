@@ -21,13 +21,19 @@ namespace ERP_Learning.PW
         public FormPurchase()
         {
             InitializeComponent();
+            this.toolAdd.Enabled = !this.toolAdd.Enabled;
+            this.toolModify.Enabled = !this.toolModify.Enabled;
+            this.toolDelete.Enabled = !this.toolDelete.Enabled;
+
+            this.dgvPO.DataError += delegate (object sender, DataGridViewDataErrorEventArgs e) { };
+
         }
 
         private void Purchase_Load(object sender, EventArgs e)
         {
             //Meterial
             DataSet material = new DataSet();
-            material = db.GetDataSet("select * from Material", "Material");
+            material = db.GetDataSet("select MaterialID,MaterialName from Material", "Material");
             cbxMaterial.DataSource = material.Tables["Material"];
             cbxMaterial.DisplayMember = "MaterialName";
             cbxMaterial.ValueMember = "MaterialID";
@@ -59,17 +65,25 @@ namespace ERP_Learning.PW
 
             //Audit
             DataTable audit = new DataTable();
-            audit.Columns.Add("ID");
-            audit.Columns.Add("audit");
-            audit.Rows.Add(0, "未审核");
-            audit.Rows.Add(1, "已审核");
+            audit.Columns.Add("IsAudit");
+            audit.Columns.Add("auditcolumn");
+            audit.Rows.Add(false, "未审核");
+            audit.Rows.Add(true, "已审核");
             cbxAudit.DataSource = audit;
-            cbxAudit.DisplayMember = "audit";
-            cbxAudit.ValueMember = "ID";
+            cbxAudit.DisplayMember = "auditcolumn";
+            cbxAudit.ValueMember = "IsAudit";
             DataGridViewComboBoxColumn dgvcbxAudit = (DataGridViewComboBoxColumn)dgvPO.Columns[8];
             dgvcbxAudit.DataSource = audit;
-            dgvcbxAudit.DisplayMember = "audit";
+            dgvcbxAudit.DisplayMember = "auditcolumn";
+            //dgvcbxAudit.ValueMember = "IsAudit";
 
+
+            ControlStatusSaveCancel();
+            ControlStatus();
+            this.BindDataGridView("", "");
+            this.BindToolStripComboBox();
+            this.cbxCondition.SelectedIndex = -1;
+            toolStrip1.Tag = "";
 
 
         }
@@ -93,7 +107,7 @@ namespace ERP_Learning.PW
             this.txtPrice.Enabled = !this.txtPrice.Enabled;
             this.txtQuantity.Enabled = !this.txtQuantity.Enabled;
             this.cbxEmployee.Enabled = !this.cbxEmployee.Enabled;
-            this.txtAmount.Enabled = !this.txtAmount.Enabled;
+            this.txtAmount.Enabled = false;
             this.cbxAudit.Enabled = !this.cbxAudit.Enabled;
 
         }
@@ -134,12 +148,12 @@ namespace ERP_Learning.PW
         private void ParametersAddValueForAdd(SqlCommand Cmd)
         {
             Cmd.Parameters.Clear();
-            Cmd.Parameters.AddWithValue("@MaterialID", cbxMaterial.ValueMember);
-            Cmd.Parameters.AddWithValue("@VendorID", cbxVendor.ValueMember);
+            Cmd.Parameters.AddWithValue("@MaterialID", cbxMaterial.SelectedValue);
+            Cmd.Parameters.AddWithValue("@VendorID", cbxVendor.SelectedValue);
             Cmd.Parameters.AddWithValue("@UnitPrice", Convert.ToDecimal( txtPrice.Text.ToString()));
             Cmd.Parameters.AddWithValue("@Quantity", Convert.ToInt16(txtQuantity.Text.ToString()));
-            Cmd.Parameters.AddWithValue("@EmployeeID", cbxEmployee.ValueMember);
-            Cmd.Parameters.AddWithValue("@IsAudit", cbxAudit.ValueMember);
+            Cmd.Parameters.AddWithValue("@EmployeeID", cbxEmployee.SelectedValue);
+            Cmd.Parameters.AddWithValue("@IsAudit",  cbxAudit.SelectedValue);
         }
         private void toolAdd_Click(object sender, EventArgs e)
         {
@@ -176,8 +190,8 @@ namespace ERP_Learning.PW
                 SqlCommand Cmd = new SqlCommand("updatePurchaseOrder", db.Conn);
                 Cmd.CommandType = CommandType.StoredProcedure;
                 this.ParametersAddValueForAdd(Cmd);
-                Cmd.Parameters.AddWithValue("@PurchaseOrderID", Convert.ToInt16( txtOrderID.Text));
-                Cmd.Parameters.AddWithValue("@CreateDate", Convert.ToDateTime(dtOrder));
+                Cmd.Parameters.AddWithValue("@PurchaseOrderID", Convert.ToInt32( txtOrderID.Text));
+                Cmd.Parameters.AddWithValue("@CreateDate", Convert.ToDateTime(dtOrder.Value));
 
                 row = Cmd.ExecuteNonQuery();
             }
@@ -207,21 +221,21 @@ namespace ERP_Learning.PW
 
             try
             {
-                if (string.IsNullOrEmpty(OrderID))
-                {
-                    Cmd.Parameters.AddWithValue("@PurchaseOrderID", DBNull.Value);
-                }
-                else
+                if (!string.IsNullOrEmpty(OrderID))
+                //{
+                //    Cmd.Parameters.AddWithValue("@PurchaseOrderID", DBNull.Value);
+                //}
+                //else
                 {
                     Cmd.Parameters.AddWithValue("@PurchaseOrderID", OrderID);
 
                 }
 
-                if (string.IsNullOrEmpty(OrderDate))
-                {
-                    Cmd.Parameters.AddWithValue("@PurchaseDate", DBNull.Value);
-                }
-                else
+                if (!string.IsNullOrEmpty(OrderDate))
+                //{
+                //    Cmd.Parameters.AddWithValue("@PurchaseDate", DBNull.Value);
+                //}
+                //else
                 {
                     Cmd.Parameters.AddWithValue("@PurchaseDate", OrderDate);
 
@@ -245,10 +259,101 @@ namespace ERP_Learning.PW
  
         }
 
-        private void dgvEmployeeInfo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+     
+
+        private void toolCancel_Click(object sender, EventArgs e)
         {
+            ControlStatus();
+            ClearControls();
+            toolStrip1.Tag = "";
+            ControlStatusSaveCancel();
+        }
+
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            db.Conn.Open();
+            int row; 
+            SqlCommand Cmd = new SqlCommand("deletePurchaseOrder", db.Conn);
+            Cmd.CommandType = CommandType.StoredProcedure;
+            Cmd.Parameters.AddWithValue("@PurchaseOrderID", Convert.ToInt32(txtOrderID.Text));
+
+            var returnValue = Cmd.Parameters.Add("@Return", SqlDbType.Int);
+            returnValue.Direction = ParameterDirection.ReturnValue; 
+            
+            row = Cmd.ExecuteNonQuery();
+            int re = (int)returnValue.Value; 
+
+            db.Conn.Close();
+            if (row > 0)
+            {
+                MessageBox.Show("删除成功", "软件提示");
+                ClearControls();
+                //ControlStatus();
+                //ControlStatusSaveCancel();
+                toolStrip1.Tag = "";
+                this.BindDataGridView("","");
+            }
+
+            else
+            {
+                if (re == 1)
+                {
+                    MessageBox.Show("订单已审核, 无法删除", "软件提示");
+                }
+                MessageBox.Show("删除失败！", "软件提示");
+            }
+
+                
+        }
+
+        private void dgvPO_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvPO.RowCount > 0)
+            {
+                FillControls();
+            }
+        }
+
+        private void toolrefresh_Click(object sender, EventArgs e)
+        {
+            this.BindDataGridView("","");
 
         }
 
+        private void toolExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void toolSearch_Click(object sender, EventArgs e)
+        {
+            string strcondition = this.cbxCondition.Items[this.cbxCondition.SelectedIndex].ToString();
+            string OrderID;
+            string OrderDate; 
+
+            switch (strcondition)
+            {
+                //    this.cbxCondition.Items.Add("单据编号");
+                //this.cbxCondition.Items.Add("单据日期");
+                case "单据编号":
+                    OrderID =  txtSearch.Text.Trim();
+                    this.BindDataGridView(OrderID, "");
+                    break;
+
+                case "单据日期":
+                    OrderDate = txtSearch.Text.Trim();
+                    this.BindDataGridView("",OrderDate);
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
+
+        private void toolSearch_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
