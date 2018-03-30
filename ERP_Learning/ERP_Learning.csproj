@@ -108,6 +108,30 @@
     <Compile Include="PW\FormStorage.Designer.cs">
       <DependentUpon>FormStorage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SE\FormCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SE\FormCustomer.Designer.cs">
+      <DependentUpon>FormCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SE\FormSalesCollection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SE\FormSalesCollection.Designer.cs">
+      <DependentUpon>FormSalesCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SE\FormSalesOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SE\FormSalesOrder.Designer.cs">
+      <DependentUpon>FormSalesOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SE\FormSalesOutbound.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SE\FormSalesOutbound.Designer.cs">
+      <DependentUpon>FormSalesOutbound.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +158,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PW\FormStorage.resx">
       <DependentUpon>FormStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SE\FormCustomer.resx">
+      <DependentUpon>FormCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SE\FormSalesCollection.resx">
+      <DependentUpon>FormSalesCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SE\FormSalesOrder.resx">
+      <DependentUpon>FormSalesOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SE\FormSalesOutbound.resx">
+      <DependentUpon>FormSalesOutbound.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ERP_LearningDataSet.xsc">
       <DependentUpon>ERP_LearningDataSet.xsd</DependentUpon>

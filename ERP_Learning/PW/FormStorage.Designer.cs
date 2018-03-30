@@ -49,20 +49,20 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbxAudit = new System.Windows.Forms.ComboBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dtWarrant = new System.Windows.Forms.DateTimePicker();
+            this.dtOrder = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtOrderID = new System.Windows.Forms.TextBox();
             this.txtWarrantID = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupPurchaseDetail = new System.Windows.Forms.GroupBox();
             this.dgvPO = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtOrderID = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.入库单编号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.订单编号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.订单日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,7 +95,7 @@
             this.toolExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(974, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(957, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -106,6 +106,7 @@
             this.toolSave.Name = "toolSave";
             this.toolSave.Size = new System.Drawing.Size(52, 22);
             this.toolSave.Text = "保存";
+            this.toolSave.Click += new System.EventHandler(this.toolSave_Click);
             // 
             // toolCancel
             // 
@@ -114,6 +115,7 @@
             this.toolCancel.Name = "toolCancel";
             this.toolCancel.Size = new System.Drawing.Size(52, 22);
             this.toolCancel.Text = "取消";
+            this.toolCancel.Click += new System.EventHandler(this.toolCancel_Click);
             // 
             // toolAdd
             // 
@@ -123,6 +125,7 @@
             this.toolAdd.Size = new System.Drawing.Size(52, 22);
             this.toolAdd.Tag = "";
             this.toolAdd.Text = "添加";
+            this.toolAdd.Click += new System.EventHandler(this.toolAdd_Click);
             // 
             // toolModify
             // 
@@ -131,6 +134,7 @@
             this.toolModify.Name = "toolModify";
             this.toolModify.Size = new System.Drawing.Size(52, 22);
             this.toolModify.Text = "修改";
+            this.toolModify.Click += new System.EventHandler(this.toolModify_Click);
             // 
             // toolDelete
             // 
@@ -139,6 +143,7 @@
             this.toolDelete.Name = "toolDelete";
             this.toolDelete.Size = new System.Drawing.Size(52, 22);
             this.toolDelete.Text = "删除";
+            this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
             // 
             // toolStripLabel1
             // 
@@ -163,6 +168,7 @@
             this.toolSearch.Name = "toolSearch";
             this.toolSearch.Size = new System.Drawing.Size(52, 22);
             this.toolSearch.Text = "查找";
+            this.toolSearch.Click += new System.EventHandler(this.toolSearch_Click);
             // 
             // toolrefresh
             // 
@@ -171,6 +177,7 @@
             this.toolrefresh.Name = "toolrefresh";
             this.toolrefresh.Size = new System.Drawing.Size(52, 22);
             this.toolrefresh.Text = "刷新";
+            this.toolrefresh.Click += new System.EventHandler(this.toolrefresh_Click);
             // 
             // toolStripSeparator1
             // 
@@ -184,6 +191,7 @@
             this.toolExit.Name = "toolExit";
             this.toolExit.Size = new System.Drawing.Size(52, 22);
             this.toolExit.Text = "退出";
+            this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
             // 
             // groupStorageOrder
             // 
@@ -199,7 +207,7 @@
             this.groupStorageOrder.Controls.Add(this.txtQuantity);
             this.groupStorageOrder.Controls.Add(this.txtPrice);
             this.groupStorageOrder.Controls.Add(this.label3);
-            this.groupStorageOrder.Controls.Add(this.dtWarrant);
+            this.groupStorageOrder.Controls.Add(this.dtOrder);
             this.groupStorageOrder.Controls.Add(this.label2);
             this.groupStorageOrder.Controls.Add(this.txtOrderID);
             this.groupStorageOrder.Controls.Add(this.txtWarrantID);
@@ -263,6 +271,15 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "数量";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 167);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "单     价";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -287,6 +304,13 @@
             this.txtQuantity.Size = new System.Drawing.Size(100, 20);
             this.txtQuantity.TabIndex = 6;
             // 
+            // txtPrice
+            // 
+            this.txtPrice.Location = new System.Drawing.Point(71, 167);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(100, 20);
+            this.txtPrice.TabIndex = 5;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -296,12 +320,12 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "物    料";
             // 
-            // dtWarrant
+            // dtOrder
             // 
-            this.dtWarrant.Location = new System.Drawing.Point(605, 37);
-            this.dtWarrant.Name = "dtWarrant";
-            this.dtWarrant.Size = new System.Drawing.Size(137, 20);
-            this.dtWarrant.TabIndex = 3;
+            this.dtOrder.Location = new System.Drawing.Point(605, 37);
+            this.dtOrder.Name = "dtOrder";
+            this.dtOrder.Size = new System.Drawing.Size(137, 20);
+            this.dtOrder.TabIndex = 3;
             // 
             // label2
             // 
@@ -311,7 +335,13 @@
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "入库日期";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // txtOrderID
+            // 
+            this.txtOrderID.Location = new System.Drawing.Point(315, 37);
+            this.txtOrderID.Name = "txtOrderID";
+            this.txtOrderID.Size = new System.Drawing.Size(100, 20);
+            this.txtOrderID.TabIndex = 2;
             // 
             // txtWarrantID
             // 
@@ -319,6 +349,15 @@
             this.txtWarrantID.Name = "txtWarrantID";
             this.txtWarrantID.Size = new System.Drawing.Size(100, 20);
             this.txtWarrantID.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(245, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "订单编号";
             // 
             // label1
             // 
@@ -360,41 +399,12 @@
             this.dgvPO.ReadOnly = true;
             this.dgvPO.Size = new System.Drawing.Size(947, 173);
             this.dgvPO.TabIndex = 0;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(245, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "订单编号";
-            // 
-            // txtOrderID
-            // 
-            this.txtOrderID.Location = new System.Drawing.Point(315, 37);
-            this.txtOrderID.Name = "txtOrderID";
-            this.txtOrderID.Size = new System.Drawing.Size(100, 20);
-            this.txtOrderID.TabIndex = 2;
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(71, 167);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(100, 20);
-            this.txtPrice.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 167);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "单     价";
+            this.dgvPO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO_CellClick);
+            this.dgvPO.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO_CellContentClick);
             // 
             // 入库单编号
             // 
+            this.入库单编号.DataPropertyName = "WarehouseWarrantID";
             this.入库单编号.Frozen = true;
             this.入库单编号.HeaderText = "入库单编号";
             this.入库单编号.Name = "入库单编号";
@@ -465,7 +475,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 578);
+            this.ClientSize = new System.Drawing.Size(957, 571);
             this.Controls.Add(this.groupPurchaseDetail);
             this.Controls.Add(this.groupStorageOrder);
             this.Controls.Add(this.toolStrip1);
@@ -509,7 +519,7 @@
         private System.Windows.Forms.ComboBox cbxAudit;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dtWarrant;
+        private System.Windows.Forms.DateTimePicker dtOrder;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtWarrantID;
         private System.Windows.Forms.Label label1;

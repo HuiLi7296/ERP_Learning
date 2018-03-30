@@ -5,65 +5,72 @@
 /* Project name:                                                          */
 /* Author:                                                                */
 /* Script type:           Alter database script                           */
-/* Created on:            2018-02-03 11:40                                */
+/* Created on:            2018-02-25 21:33                                */
 /* ---------------------------------------------------------------------- */
 
 
 /* ---------------------------------------------------------------------- */
-/* Drop foreign key constraints                                           */
+/* Add table "SalesOutbound"                                              */
 /* ---------------------------------------------------------------------- */
 
-ALTER TABLE [dbo].[PurchaseOrder] DROP CONSTRAINT [Material_PurchaseOrder]
+CREATE TABLE [SalesOutbound] (
+    [SalesOutboundID] INTEGER IDENTITY(600001,1) NOT NULL,
+    [SalesOrderID] VARCHAR(40) NOT NULL,
+    [CreateDate] DATE CONSTRAINT [DEF_SalesOutbound_CreateDate] DEFAULT getdate() NOT NULL,
+    [Quantity] INTEGER CONSTRAINT [DEF_SalesOutbound_Quantity] DEFAULT 0 NOT NULL,
+    [Address] NVARCHAR(200),
+    CONSTRAINT [PK_SalesOutbound] PRIMARY KEY ([SalesOutboundID])
+)
 GO
 
 
-ALTER TABLE [dbo].[PurchaseOrder] DROP CONSTRAINT [Vendor_PurchaseOrder]
+EXECUTE sp_addextendedproperty N'MS_Description', N'销售出库单编号', 'SCHEMA', N'dbo', 'TABLE', N'SalesOutbound', 'COLUMN', N'SalesOutboundID'
 GO
 
 
-ALTER TABLE [dbo].[PurchaseOrder] DROP CONSTRAINT [Employee_PurchaseOrder]
+EXECUTE sp_addextendedproperty N'MS_Description', N'销售订单', 'SCHEMA', N'dbo', 'TABLE', N'SalesOutbound', 'COLUMN', N'SalesOrderID'
 GO
 
 
-ALTER TABLE [dbo].[WarehouseWarrant] DROP CONSTRAINT [Employee_WarehouseWarrant]
+EXECUTE sp_addextendedproperty N'MS_Description', N'出库单日期', 'SCHEMA', N'dbo', 'TABLE', N'SalesOutbound', 'COLUMN', N'CreateDate'
 GO
 
 
-ALTER TABLE [dbo].[WarehouseWarrant] DROP CONSTRAINT [PurchaseOrder_WarehouseWarrant]
+EXECUTE sp_addextendedproperty N'MS_Description', N'数量', 'SCHEMA', N'dbo', 'TABLE', N'SalesOutbound', 'COLUMN', N'Quantity'
 GO
 
 
-/* ---------------------------------------------------------------------- */
-/* Modify table "PurchaseOrder"                                           */
-/* ---------------------------------------------------------------------- */
-
-ALTER TABLE [dbo].[PurchaseOrder] DROP CONSTRAINT [DEF_PurchaseOrder_CreateDate]
-GO
-
-
-ALTER TABLE [dbo].[PurchaseOrder] ALTER COLUMN [CreateDate] DATE NOT NULL
-GO
-
-
-ALTER TABLE [dbo].[PurchaseOrder] ADD CONSTRAINT [DEF_PurchaseOrder_CreateDate] 
-    DEFAULT (getdate()) FOR [CreateDate]
+EXECUTE sp_addextendedproperty N'MS_Description', N'地址', 'SCHEMA', N'dbo', 'TABLE', N'SalesOutbound', 'COLUMN', N'Address'
 GO
 
 
 /* ---------------------------------------------------------------------- */
-/* Modify table "WarehouseWarrant"                                        */
+/* Add table "SalesCollection"                                            */
 /* ---------------------------------------------------------------------- */
 
-ALTER TABLE [dbo].[WarehouseWarrant] DROP CONSTRAINT [DEF_WarehouseWarrant_CreateDate]
+CREATE TABLE [SalesCollection] (
+    [SalesCollectionID] INTEGER IDENTITY(900001,1) NOT NULL,
+    [SalesOrderID] INTEGER NOT NULL,
+    [CreateDate] DATE CONSTRAINT [DEF_SalesCollection_CreateDate] DEFAULT getdate() NOT NULL,
+    [Amount] MONEY NOT NULL,
+    CONSTRAINT [PK_SalesCollection] PRIMARY KEY ([SalesCollectionID])
+)
 GO
 
 
-ALTER TABLE [dbo].[WarehouseWarrant] ALTER COLUMN [CreateDate] DATE NOT NULL
+EXECUTE sp_addextendedproperty N'MS_Description', N'销售收款单编号', 'SCHEMA', N'dbo', 'TABLE', N'SalesCollection', 'COLUMN', N'SalesCollectionID'
 GO
 
 
-ALTER TABLE [dbo].[WarehouseWarrant] ADD CONSTRAINT [DEF_WarehouseWarrant_CreateDate] 
-    DEFAULT (getdate()) FOR [CreateDate]
+EXECUTE sp_addextendedproperty N'MS_Description', N'销售订单', 'SCHEMA', N'dbo', 'TABLE', N'SalesCollection', 'COLUMN', N'SalesOrderID'
+GO
+
+
+EXECUTE sp_addextendedproperty N'MS_Description', N'收款单日期', 'SCHEMA', N'dbo', 'TABLE', N'SalesCollection', 'COLUMN', N'CreateDate'
+GO
+
+
+EXECUTE sp_addextendedproperty N'MS_Description', N'收款金额', 'SCHEMA', N'dbo', 'TABLE', N'SalesCollection', 'COLUMN', N'Amount'
 GO
 
 
@@ -71,27 +78,12 @@ GO
 /* Add foreign key constraints                                            */
 /* ---------------------------------------------------------------------- */
 
-ALTER TABLE [dbo].[PurchaseOrder] ADD CONSTRAINT [Material_PurchaseOrder] 
-    FOREIGN KEY ([MaterialID]) REFERENCES [dbo].[Material] ([MaterialID])
+ALTER TABLE [SalesOutbound] ADD CONSTRAINT [SalesOrder_SalesOutbound] 
+    FOREIGN KEY ([SalesOrderID]) REFERENCES [dbo].[SalesOrder] ([SalesOrderID])
 GO
 
 
-ALTER TABLE [dbo].[PurchaseOrder] ADD CONSTRAINT [Vendor_PurchaseOrder] 
-    FOREIGN KEY ([VendorID]) REFERENCES [dbo].[Vendor] ([VendorID])
-GO
-
-
-ALTER TABLE [dbo].[PurchaseOrder] ADD CONSTRAINT [Employee_PurchaseOrder] 
-    FOREIGN KEY ([EmployeeID]) REFERENCES [dbo].[Employee] ([EmployeeID])
-GO
-
-
-ALTER TABLE [dbo].[WarehouseWarrant] ADD CONSTRAINT [Employee_WarehouseWarrant] 
-    FOREIGN KEY ([EmployeeID]) REFERENCES [dbo].[Employee] ([EmployeeID])
-GO
-
-
-ALTER TABLE [dbo].[WarehouseWarrant] ADD CONSTRAINT [PurchaseOrder_WarehouseWarrant] 
-    FOREIGN KEY ([PurchaseOrderID]) REFERENCES [dbo].[PurchaseOrder] ([PurchaseOrderID])
+ALTER TABLE [SalesCollection] ADD CONSTRAINT [SalesOrder_SalesCollection] 
+    FOREIGN KEY ([SalesOrderID]) REFERENCES [dbo].[SalesOrder] ([SalesOrderID])
 GO
 

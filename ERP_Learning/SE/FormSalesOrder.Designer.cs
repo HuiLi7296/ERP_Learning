@@ -1,6 +1,6 @@
-﻿namespace ERP_Learning.PW
+﻿namespace ERP_Learning.SE
 {
-    partial class FormPurchase
+    partial class FormSalesOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPurchase));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSalesOrder));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolSave = new System.Windows.Forms.ToolStripButton();
             this.toolCancel = new System.Windows.Forms.ToolStripButton();
@@ -44,8 +44,8 @@
             this.toolExit = new System.Windows.Forms.ToolStripButton();
             this.groupPurchaseOrder = new System.Windows.Forms.GroupBox();
             this.cbxEmployee = new System.Windows.Forms.ComboBox();
-            this.cbxVendor = new System.Windows.Forms.ComboBox();
-            this.cbxMaterial = new System.Windows.Forms.ComboBox();
+            this.cbxCustomer = new System.Windows.Forms.ComboBox();
+            this.cbxProduct = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,8 +65,8 @@
             this.dgvPO = new System.Windows.Forms.DataGridView();
             this.订单编号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.订单日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.供应商 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.产品 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.客户 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.操作员 = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -95,8 +95,8 @@
             this.toolExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(862, 25);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Size = new System.Drawing.Size(945, 25);
+            this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolSave
@@ -196,8 +196,8 @@
             // groupPurchaseOrder
             // 
             this.groupPurchaseOrder.Controls.Add(this.cbxEmployee);
-            this.groupPurchaseOrder.Controls.Add(this.cbxVendor);
-            this.groupPurchaseOrder.Controls.Add(this.cbxMaterial);
+            this.groupPurchaseOrder.Controls.Add(this.cbxCustomer);
+            this.groupPurchaseOrder.Controls.Add(this.cbxProduct);
             this.groupPurchaseOrder.Controls.Add(this.label9);
             this.groupPurchaseOrder.Controls.Add(this.label8);
             this.groupPurchaseOrder.Controls.Add(this.label7);
@@ -213,12 +213,12 @@
             this.groupPurchaseOrder.Controls.Add(this.label2);
             this.groupPurchaseOrder.Controls.Add(this.txtOrderID);
             this.groupPurchaseOrder.Controls.Add(this.label1);
-            this.groupPurchaseOrder.Location = new System.Drawing.Point(12, 42);
+            this.groupPurchaseOrder.Location = new System.Drawing.Point(15, 52);
             this.groupPurchaseOrder.Name = "groupPurchaseOrder";
             this.groupPurchaseOrder.Size = new System.Drawing.Size(788, 227);
-            this.groupPurchaseOrder.TabIndex = 4;
+            this.groupPurchaseOrder.TabIndex = 8;
             this.groupPurchaseOrder.TabStop = false;
-            this.groupPurchaseOrder.Text = "采购订单";
+            this.groupPurchaseOrder.Text = "销售订单";
             // 
             // cbxEmployee
             // 
@@ -228,21 +228,21 @@
             this.cbxEmployee.Size = new System.Drawing.Size(100, 21);
             this.cbxEmployee.TabIndex = 7;
             // 
-            // cbxVendor
+            // cbxCustomer
             // 
-            this.cbxVendor.FormattingEnabled = true;
-            this.cbxVendor.Location = new System.Drawing.Point(71, 97);
-            this.cbxVendor.Name = "cbxVendor";
-            this.cbxVendor.Size = new System.Drawing.Size(100, 21);
-            this.cbxVendor.TabIndex = 4;
+            this.cbxCustomer.FormattingEnabled = true;
+            this.cbxCustomer.Location = new System.Drawing.Point(71, 97);
+            this.cbxCustomer.Name = "cbxCustomer";
+            this.cbxCustomer.Size = new System.Drawing.Size(100, 21);
+            this.cbxCustomer.TabIndex = 4;
             // 
-            // cbxMaterial
+            // cbxProduct
             // 
-            this.cbxMaterial.FormattingEnabled = true;
-            this.cbxMaterial.Location = new System.Drawing.Point(613, 37);
-            this.cbxMaterial.Name = "cbxMaterial";
-            this.cbxMaterial.Size = new System.Drawing.Size(100, 21);
-            this.cbxMaterial.TabIndex = 3;
+            this.cbxProduct.FormattingEnabled = true;
+            this.cbxProduct.Location = new System.Drawing.Point(613, 37);
+            this.cbxProduct.Name = "cbxProduct";
+            this.cbxProduct.Size = new System.Drawing.Size(100, 21);
+            this.cbxProduct.TabIndex = 3;
             // 
             // label9
             // 
@@ -294,9 +294,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "供应商";
+            this.label4.Text = "客户";
             // 
             // cbxAudit
             // 
@@ -334,7 +334,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "物料";
+            this.label3.Text = "产品";
             // 
             // dtOrder
             // 
@@ -371,12 +371,12 @@
             // groupPurchaseDetail
             // 
             this.groupPurchaseDetail.Controls.Add(this.dgvPO);
-            this.groupPurchaseDetail.Location = new System.Drawing.Point(12, 292);
+            this.groupPurchaseDetail.Location = new System.Drawing.Point(15, 333);
             this.groupPurchaseDetail.Name = "groupPurchaseDetail";
             this.groupPurchaseDetail.Size = new System.Drawing.Size(788, 192);
-            this.groupPurchaseDetail.TabIndex = 5;
+            this.groupPurchaseDetail.TabIndex = 9;
             this.groupPurchaseDetail.TabStop = false;
-            this.groupPurchaseDetail.Text = "采购订单列表";
+            this.groupPurchaseDetail.Text = "销售订单列表";
             // 
             // dgvPO
             // 
@@ -387,8 +387,8 @@
             this.dgvPO.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.订单编号,
             this.订单日期,
-            this.物料,
-            this.供应商,
+            this.产品,
+            this.客户,
             this.单价,
             this.数量,
             this.操作员,
@@ -403,7 +403,7 @@
             // 
             // 订单编号
             // 
-            this.订单编号.DataPropertyName = "PurchaseOrderID";
+            this.订单编号.DataPropertyName = "SalesOrderID";
             this.订单编号.HeaderText = "订单编号";
             this.订单编号.Name = "订单编号";
             this.订单编号.ReadOnly = true;
@@ -415,19 +415,19 @@
             this.订单日期.Name = "订单日期";
             this.订单日期.ReadOnly = true;
             // 
-            // 物料
+            // 产品
             // 
-            this.物料.DataPropertyName = "MaterialName";
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            this.物料.ReadOnly = true;
+            this.产品.DataPropertyName = "ProductName";
+            this.产品.HeaderText = "产品";
+            this.产品.Name = "产品";
+            this.产品.ReadOnly = true;
             // 
-            // 供应商
+            // 客户
             // 
-            this.供应商.DataPropertyName = "VendorName";
-            this.供应商.HeaderText = "供应商";
-            this.供应商.Name = "供应商";
-            this.供应商.ReadOnly = true;
+            this.客户.DataPropertyName = "CustomerName";
+            this.客户.HeaderText = "客户";
+            this.客户.Name = "客户";
+            this.客户.ReadOnly = true;
             // 
             // 单价
             // 
@@ -468,17 +468,17 @@
             this.是否审核.Name = "是否审核";
             this.是否审核.ReadOnly = true;
             // 
-            // FormPurchase
+            // FormSalesOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 496);
+            this.ClientSize = new System.Drawing.Size(945, 600);
             this.Controls.Add(this.groupPurchaseDetail);
             this.Controls.Add(this.groupPurchaseOrder);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "FormPurchase";
-            this.Text = "FormPurchase";
-            this.Load += new System.EventHandler(this.Purchase_Load);
+            this.Name = "FormSalesOrder";
+            this.Text = "FormSalesOrder";
+            this.Load += new System.EventHandler(this.FormSalesOrder_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupPurchaseOrder.ResumeLayout(false);
@@ -506,6 +506,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolExit;
         private System.Windows.Forms.GroupBox groupPurchaseOrder;
+        private System.Windows.Forms.ComboBox cbxEmployee;
+        private System.Windows.Forms.ComboBox cbxCustomer;
+        private System.Windows.Forms.ComboBox cbxProduct;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -523,13 +526,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupPurchaseDetail;
         private System.Windows.Forms.DataGridView dgvPO;
-        private System.Windows.Forms.ComboBox cbxVendor;
-        private System.Windows.Forms.ComboBox cbxMaterial;
-        private System.Windows.Forms.ComboBox cbxEmployee;
         private System.Windows.Forms.DataGridViewTextBoxColumn 订单编号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 订单日期;
-        private System.Windows.Forms.DataGridViewComboBoxColumn 物料;
-        private System.Windows.Forms.DataGridViewComboBoxColumn 供应商;
+        private System.Windows.Forms.DataGridViewComboBoxColumn 产品;
+        private System.Windows.Forms.DataGridViewComboBoxColumn 客户;
         private System.Windows.Forms.DataGridViewTextBoxColumn 单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewComboBoxColumn 操作员;
